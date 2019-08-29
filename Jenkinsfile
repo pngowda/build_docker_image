@@ -18,6 +18,7 @@ pipeline {
                 echo 'Starting to test docker image'
 
                 script {
+                    println "test"
                     //customContainer = customImage.run("-p 8083:8081 --name test_nexus_container_${env.BUILD_ID}")
                     //customContainer.inside("curl http://localhost:8082")
                 }
@@ -29,6 +30,7 @@ pipeline {
             echo "Stop Docker image"
             script {
                 if (customContainer) {
+                    println "test"
                     //customContainer.stop()
                 }
             }
