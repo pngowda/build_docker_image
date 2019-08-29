@@ -15,13 +15,13 @@ pipeline {
             steps {
                 echo 'Starting to test docker image'
                 script {
-                    docker.image("my-image:${env.BUILD_ID}").withRun('-p 8081:8081') {c ->
-                       sleep 10
-                       sh "curl -i http://127.0.0.1:8081/"
-                    }
+                    //docker.image("my-image:${env.BUILD_ID}").withRun('-p 8081:8081') {c ->
+                   //    sleep 10
+                    //   sh "curl -i http://127.0.0.1:8081/"
+                   // }
                
-                    //customContainer = customImage.run("-p 8083:8081 --name test_nexus_container_${env.BUILD_ID}")
-                    //customImage.inside {sh 'curl http://localhost:8083/'}
+                   customContainer = customImage.run("-p 8081:8081")
+                   customImage.inside {sh 'curl -i http:///127.0.0.1:8081/'}
                 }
             }
         }
@@ -31,13 +31,12 @@ pipeline {
     post {
         always {
             echo "Stop Docker image"
-            //script {
-                //sh "docker rmi -f my-image:${env.BUILD_ID}"
-                //if (customContainer) {
-                    //customContainer.stop()
-                    //sh "docker rmi -f my-image:${env.BUILD_ID}"
-                //}
-           //}
+            script {
+                    if (customContainer) {
+                    customContainer.stop()
+                    sh "docker rmi -f my-image:${env.BUILD_ID}"
+                }
+           }
         }
     }
 }
