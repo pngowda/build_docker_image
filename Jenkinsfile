@@ -32,18 +32,13 @@ pipeline {
     post {
         always {
             echo "Stop Docker image"
-            script {
-                sh "docker rmi -f my-image:${env.BUILD_ID}"
+            //script {
+                //sh "docker rmi -f my-image:${env.BUILD_ID}"
                 if (customContainer) {
-                    customContainer.stop()
-                    sh "docker rmi -f my-image:${env.BUILD_ID}"
-                }
-            }
+                    //customContainer.stop()
+                    //sh "docker rmi -f my-image:${env.BUILD_ID}"
+                //}
+           //}
         }
     }
-}
-
-def hostIp(container) {
-  sh "docker inspect -f {{.Node.Ip}} ${container.id} > hostIp"
-  readFile('hostIp').trim()
 }
