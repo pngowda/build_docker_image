@@ -18,10 +18,7 @@ pipeline {
                 echo 'Starting to test docker image'
                 script {
                     docker.image("my-image:${env.BUILD_ID}").withRun('-p 8081:8081') {c ->
-                       //sh "curl -i http://${hostIp(c)}:8080/"
-                        sh "docker inspect -f {{.Node.Ip}} ${container.id} > hostIp"
-                        println readFile('hostIp').trim()
-                        sh "curl -i http://${hostIp}:8081/"
+                       sh "curl -i http://${hostIp(c)}:8081/"
                     }
                
                     //customContainer = customImage.run("-p 8083:8081 --name test_nexus_container_${env.BUILD_ID}")
@@ -44,4 +41,9 @@ pipeline {
             }
         }
     }
+}
+
+def hostIp(container) {
+  sh "docker inspect -f {{.Node.Ip}} ${container.id} > hostIp"
+  readFile('hostIp').trim()
 }
