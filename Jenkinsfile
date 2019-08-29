@@ -19,7 +19,7 @@ pipeline {
                 script {
                     docker.image(customImage).withRun('-p 8083:8081') {c ->
                        //sh "curl -i http://${hostIp(c)}:8080/"
-                       sh "curl http://localhost:8083/
+                       sh "curl http://localhost:8083/"
                     }
                
                     //customContainer = customImage.run("-p 8083:8081 --name test_nexus_container_${env.BUILD_ID}")
