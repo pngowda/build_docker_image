@@ -17,7 +17,7 @@ pipeline {
             steps {
                 echo 'Starting to test docker image'
                 script {
-                    docker.image(customImage).withRun('-p 8083:8081') {c ->
+                    docker.image("my-image:${env.BUILD_ID}").withRun('-p 8083:8081') {c ->
                        //sh "curl -i http://${hostIp(c)}:8080/"
                        sh "curl http://localhost:8083/"
                     }
