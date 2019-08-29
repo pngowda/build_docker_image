@@ -8,7 +8,7 @@ pipeline {
                 echo 'Starting to build docker image'
 
                 script {
-                    sh "docker rmi -f my-image"
+                    sh "docker rmi -f my-image:2, my-image:3, my-image:4, my-image:5, my-image:6"
                     //customImage = docker.build("my-image:${env.BUILD_ID}")
                 }
             }
