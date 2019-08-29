@@ -34,7 +34,7 @@ pipeline {
             echo "Stop Docker image"
             //script {
                 //sh "docker rmi -f my-image:${env.BUILD_ID}"
-                if (customContainer) {
+                //if (customContainer) {
                     //customContainer.stop()
                     //sh "docker rmi -f my-image:${env.BUILD_ID}"
                 //}
