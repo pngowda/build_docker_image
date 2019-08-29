@@ -3,16 +3,16 @@ def customContainer
 pipeline {
     agent any
     stages {
-        stage('Build Docker Image') {
-            steps {
-                echo 'Starting to build docker image'
+    //    stage('Build Docker Image') {
+     //       steps {
+     //           echo 'Starting to build docker image'
 
-                script {
-                    customImage = docker.build("my-image:${env.BUILD_ID}")
-                    println customImage
-                }
-            }
-        }
+       //         script {
+       //             customImage = docker.build("my-image:${env.BUILD_ID}")
+        //            println customImage
+              //  }
+           // }
+       // }
         stage('Test Docker Image') {
             steps {
                 echo 'Starting to test docker image'
