@@ -1,7 +1,7 @@
+def customImage
+def customContainer
 pipeline {
     agent any
-    def customImage
-    def customContainer
     stages {
         stage('Build Docker Image') {
             steps {
