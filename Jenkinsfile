@@ -20,7 +20,7 @@ pipeline {
                     docker.image("my-image:${env.BUILD_ID}").withRun('-p 8081:8081') {c ->
                        //sh "curl -i http://${hostIp(c)}:8080/"
                         sh "docker inspect -f {{.Node.Ip}} ${container.id} > hostIp"
-                        def hostIp=readFile('hostIp').trim()
+                        println readFile('hostIp').trim()
                         sh "curl -i http://${hostIp}:8081/"
                     }
                
