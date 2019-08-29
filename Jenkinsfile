@@ -17,7 +17,8 @@ pipeline {
                 echo 'Starting to test docker image'
 
                 script {
-                    customContainer = customImage.run("-d -p 8082:8081 --name test_nexus_container")
+                    customContainer = customImage.run("-p 8082:8081 --name test_nexus_container")
+                    sh "curl http://localhost:8082"
                 }
             }
         }
