@@ -19,7 +19,7 @@ pipeline {
 
                 script {
                     customContainer = customImage.run("-p 8083:8081 --name test_nexus_container_${env.BUILD_ID}")
-                    customImage.inside {sh "curl http://localhost:8083"}
+                    customImage.inside {sh 'curl http://localhost:8083/'}
                 }
             }
         }
