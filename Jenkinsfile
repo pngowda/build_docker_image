@@ -1,5 +1,6 @@
 def customImage
 def customContainer
+import groovy.json.JsonSlurperClassic
 pipeline {
     agent any
     stages {
