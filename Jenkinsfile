@@ -8,7 +8,8 @@ pipeline {
         stage('Parse Json File') {
             steps {
              script {
-                  def props = readJSON file: 'test.json'
+                  def props = parseJsonToMap(json)
+                  #def props = readJSON file: 'test.json'
                   println props['BaseImagePath']
                   println props['TargetImagePath']
                   props.images.each {
@@ -50,3 +51,10 @@ pipeline {
         }
     }
 }
+
+@NonCPS
+def parseJsonToMap(String json) {
+    final slurper = new JsonSlurperClassic()
+    return new HashMap<>(slurper.parseText(json))
+}
+
