@@ -3,7 +3,21 @@ def customContainer
 pipeline {
     agent any
     stages {
-        stage('Build Docker Image') {
+        
+        stage('Parse Json File') {
+            steps {
+             script {
+                  def props = readJSON file: 'test.json'
+                  println props['BaseImagePath']
+                  println props['TargetImagePath']
+                  props.images.each {
+                     println "image: $it"
+                  }
+                }
+            }
+        }
+        
+       /* stage('Build Docker Image') {
             steps {
               echo 'Starting to build docker image'
               script {
@@ -20,7 +34,7 @@ pipeline {
                    customImage.inside {sh 'curl -i http:///127.0.0.1:8081/'}
                 }
             }
-        }
+        }*/
     }
     
     post {
