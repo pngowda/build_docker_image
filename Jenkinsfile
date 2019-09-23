@@ -8,8 +8,8 @@ pipeline {
         stage('Parse Json File') {
             steps {
              script {
-                  def props = parseJsonToMap('test.json')
-                  //def props = readJSON file: 'test.json'
+                  //def props = parseJsonToMap('test.json')
+                  def props = readJSON file: 'test.json'
                   println props['BaseImagePath']
                   println props['TargetImagePath']
                   props.images.each {
