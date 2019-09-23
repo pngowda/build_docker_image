@@ -8,7 +8,7 @@
            "imageRunCmd": "",
            "imageTestCmd": "",
            "imageVersion": "",
-           "dependsOn":"base"
+           "dependsOn":""
         },
         {
            "imageType": "target",
@@ -17,15 +17,6 @@
            "imageVersion": "",
            "imageRunCmd": "",
            "imageTestCmd": "",
-           "dependsOn":"dependent1"
-        },
-        {
-           "imageType": "dependent1",
-           "imageName": "",
-           "imagePath": "",
-           "imageRunCmd": "",
-           "imageTestCmd": "",
-           "imageVersion": "",
            "dependsOn":"base"
         }
      ]
