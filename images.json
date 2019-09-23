@@ -1,9 +1,9 @@
 {
-      "RepoName": "",
+      "RepoName": "SCT",
       "images": [
         {
            "imageType": "base",
-           "imageName": "",
+           "imageName": "jenkinsagent",
            "imagePath": "./base/Dockerfile",
            "imageRunCmd": "",
            "imageTestCmd": "",
@@ -12,7 +12,7 @@
         },
         {
            "imageType": "target",
-           "imageName": "",
+           "imageName": "sct_jenkinsagent",
            "imagePath": "./sct/Dockerfile",
            "imageVersion": "",
            "imageRunCmd": "",
