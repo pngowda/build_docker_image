@@ -25,7 +25,6 @@ def parseJsonToMap(String json) {
 pipeline {
 
     agent any
-    checkout scm
 
     stages {
         stage('json') {
@@ -36,7 +35,7 @@ pipeline {
                     //            "  \"foo\":\"f00\",\n" +
                     //            "  \"bar\":\"baa\"\n" +
                     //            "}"
-                     def json=jsonSlurper.parse(new File("${env.WORKSPACE}/test.json"))
+                     def json=JsonSlurperClassic.parse(new File("${env.WORKSPACE}/test.json"))
                     echo "Parsing JSON: ${json}"
 
                     def map = parseJsonToMap(json)
