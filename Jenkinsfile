@@ -1,21 +1,9 @@
+import groovy.json.JsonSlurper;
 node() {
     stage("checkout") {
-        def jsonString = '{"RepoName": "test", \
-        "images": 
-        [ \
-            {\
-               "imageType": "base", \
-               "imageName": "",\
-               "imagePath": "./base/Dockerfile",\
-               "imageRunCmd": "",\
-               "imageTestCmd": "",\
-               "imageVersion": "",\
-               "dependsOn":"base"\
-        }\
-        ]}'
-        def jsonObj = readJSON text: jsonString
-
-        assert jsonObj['RepoName'] == 'test'  // this is a comparison.  It returns true
-        sh "echo ${jsonObj.RepoName}"  // prints out katone
+      def jsonSlurper = new JsonSlurper()
+      File fl = new File('test.json')
+      // parse(File file) method is available since 2.2.0
+      def obj = jsonSlurper.parse(fl)
     }
 }
