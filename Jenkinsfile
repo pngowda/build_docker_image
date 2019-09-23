@@ -30,11 +30,11 @@ pipeline {
             steps {
                 script {
 
-                    def json = "{\n" +
-                                "  \"foo\":\"f00\",\n" +
-                                "  \"bar\":\"baa\"\n" +
-                                "}"
-
+                    //def json = "{\n" +
+                    //            "  \"foo\":\"f00\",\n" +
+                    //            "  \"bar\":\"baa\"\n" +
+                    //            "}"
+                     def json=jsonSlurper.parse(new File("${env.WORKSPACE}/test.json"))
                     echo "Parsing JSON: ${json}"
 
                     def map = parseJsonToMap(json)
