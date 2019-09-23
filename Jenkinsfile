@@ -1,10 +1,40 @@
 node() {
     stage("checkout") {
-        def jsonString = '{"name":"katone","age":5}'
+        def jsonString = ' {
+      "RepoName": "test",
+      "images": [
+        {
+           "imageType": "base",
+           "imageName": "",
+           "imagePath": "./base/Dockerfile",
+           "imageRunCmd": "",
+           "imageTestCmd": "",
+           "imageVersion": "",
+           "dependsOn":"base"
+        },
+        {
+           "imageType": "target",
+           "imageName": "",
+           "imagePath": "./sct/Dockerfile",
+           "imageVersion": "",
+           "imageRunCmd": "",
+           "imageTestCmd": "",
+           "dependsOn":"dependent1"
+        },
+        {
+           "imageType": "dependent1",
+           "imageName": "",
+           "imagePath": "",
+           "imageRunCmd": "",
+           "imageTestCmd": "",
+           "imageVersion": "",
+           "dependsOn":"base"
+        }
+     ]
+   }'
         def jsonObj = readJSON text: jsonString
 
-        assert jsonObj['name'] == 'katone'  // this is a comparison.  It returns true
-        sh "echo ${jsonObj.name}"  // prints out katone
-        sh "echo ${jsonObj.age}"   // prints out 5
+        assert jsonObj['RepoName'] == 'test'  // this is a comparison.  It returns true
+        sh "echo ${jsonObj.RepoName}"  // prints out katone
     }
 }
