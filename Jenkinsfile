@@ -1,49 +1,10 @@
-import groovy.json.JsonSlurperClassic
-import groovy.json.JsonSlurper
+node() {
+    stage("checkout") {
+        def jsonString = '{"name":"katone","age":5}'
+        def jsonObj = readJSON text: jsonString
 
-/**
- * Parse JSON to a map.
- *
- * It needs script approvals:
- *
- *  'method groovy.json.JsonSlurperClassic parseText java.lang.String'
- *  'new groovy.json.JsonSlurperClassic'
- *  'new java.util.HashMap java.util.Map'
- *
- * Also see:
- * http://stackoverflow.com/questions/37864542/jenkins-pipeline-notserializableexception-groovy-json-internal-lazymap
- *
- * @param json Json string to parse with name / value properties
- * @return A map of properties
- */
-@NonCPS
-def parseJsonToMap(String json) {
-    final slurper = new JsonSlurperClassic()
-    return new HashMap<>(slurper.parseText(json))
-}
-
-pipeline {
-
-    agent any
-
-    stages {
-        stage('json') {
-            steps {
-                script {
-
-                    //def json = "{\n" +
-                    //            "  \"foo\":\"f00\",\n" +
-                    //            "  \"bar\":\"baa\"\n" +
-                    //            "}"
-                     def json=JsonSlurperClassic.parse(new File("${env.WORKSPACE}/test.json"))
-                    echo "Parsing JSON: ${json}"
-
-                    def map = parseJsonToMap(json)
-
-                    echo  "foo = ${map.foo}"
-                    echo  "bar = ${map.bar}"
-                }
-            }
-        }
+        assert jsonObj['name'] == 'katone'  // this is a comparison.  It returns true
+        sh "echo ${jsonObj.name}"  // prints out katone
+        sh "echo ${jsonObj.age}"   // prints out 5
     }
 }
