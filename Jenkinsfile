@@ -1,4 +1,5 @@
 import groovy.json.JsonSlurperClassic
+import groovy.json.JsonSlurper
 
 /**
  * Parse JSON to a map.
