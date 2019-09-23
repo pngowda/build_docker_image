@@ -1,3 +1,4 @@
+import groovy.json.JsonSlurper
 node() {
     stage("checkout") {
        def jsonSlurper = new JsonSlurper()
