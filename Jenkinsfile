@@ -1,6 +1,6 @@
 node() {
     stage("checkout") {
-        def props = readJSON file: 'dir/test.json'
+        def props = readJSON file: './test.json'
         //def jsonString = '{"name":"katone","age":5}'
         //def jsonObj = readJSON text: jsonString
 
