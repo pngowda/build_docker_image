@@ -39,17 +39,6 @@ pipeline {
         }*/
     }
     
-    post {
-        always {
-            echo "Stop Docker image"
-            script {
-                    if (customContainer) {
-                    customContainer.stop()
-                    sh "docker rmi -f my-image:${env.BUILD_ID}"
-                }
-           }
-        }
-    }
 }
 
 @NonCPS
