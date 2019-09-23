@@ -1,39 +1,11 @@
-  {
-      "BaseImagePath": "./sct/Dockerfile",
-      "BaseImageRun": "",
-      "BaseImageTest":"",
-      "TargetImagePath": "./base/Dockerfile",
-      "TargetImagRun": "",
-      "TargetImagTest": "",
-      "RepoName": "",
-      "images": [
-        {
-           "imageType": "base",
-           "imageName": "",
-           "imagePath": "",
-           "imageRunCmd": "",
-           "imageTestCmd": "",
-           "imageVersion": "",
-           "dependsOn":"base"
-        },
-        {
-           "imageType": "target",
-           "imageName": "",
-           "imagePath": "",
-           "imageVersion": "",
-           "imageRunCmd": "",
-           "imageTestCmd": "",
-           "dependsOn":"dependent1"
-        },
-        {
-           "imageType": "dependent1",
-           "imageName": "",
-           "imagePath": "",
-           "imageRunCmd": "",
-           "imageTestCmd": "",
-           "imageVersion": "",
-           "dependsOn":"base"
-        }
-     ]
-   }
-
+  {"menu": {
+  "id": "file",
+  "value": "File",
+  "popup": {
+    "menuitem": [
+      {"value": "New", "onclick": "CreateNewDoc()"},
+      {"value": "Open", "onclick": "OpenDoc()"},
+      {"value": "Close", "onclick": "CloseDoc()"}
+    ]
+  }
+}}
