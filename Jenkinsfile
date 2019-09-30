@@ -8,5 +8,8 @@ node() {
       def obj = jsonSlurper.parse(fl)
       println obj.RepoName
       println obj.images.imageType
+      println(currentBuild.changeSets) 
     }
+    
+    
 }
