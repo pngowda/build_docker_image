@@ -19,6 +19,7 @@ node() {
               def file = files[k]
               echo "  ${file.editType.name} ${file.path}"
           }
-      }
-   }
+       }
+    }
+  }
 }
