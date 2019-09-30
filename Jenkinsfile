@@ -1,6 +1,6 @@
 import groovy.json.JsonSlurper;
 node() {
-    stage("checkout") {
+    stage("checkout and parse json") {
       checkout scm
       def jsonSlurper = new JsonSlurper()
       File fl = new File("${WORKSPACE}/images.json")
@@ -8,8 +8,11 @@ node() {
       def obj = jsonSlurper.parse(fl)
       println obj.RepoName
       println obj.images.imageType
-      def changeLogSets = currentBuild.changeSets
-      for (int i = 0; i < changeLogSets.size(); i++) {
+        
+    }
+     stage("parse changesets") {
+       def changeLogSets = currentBuild.changeSets
+       for (int i = 0; i < changeLogSets.size(); i++) {
          def entries = changeLogSets[i].items
          for (int j = 0; j < entries.length; j++) {
            def entry = entries[j]
@@ -18,15 +21,15 @@ node() {
            for (int k = 0; k < files.size(); k++) {
               def file = files[k]
               echo "  ${file.editType.name} ${file.path}"
-          }
-       }
+            }
+         }
+      }
     }
-  }
     
-    stage('test script') {
+    stage('define version info') {
             echo "current build number: ${currentBuild.number}"
             echo "previous build number: ${currentBuild.previousBuild.getNumber()}"
             def causes = currentBuild.rawBuild.getCauses()
             echo "causes: ${causes}"
-        }
+    }
 }
