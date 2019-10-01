@@ -9,7 +9,7 @@
               "imageTestCmd": "",
               "imageVersion": "",
               "dependsOn":""
-            }
+            },
           "target": 
              { 
               "imagepath" : "./target/Dockerfile",
