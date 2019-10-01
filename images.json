@@ -4,7 +4,7 @@
       {
          "base": 
             { 
-              "imagepath" : "./base/Dockerfile",
+              "imagePath" : "./base/Dockerfile",
               "imageRunCmd": "",
               "imageTestCmd": "",
               "imageVersion": "",
@@ -12,7 +12,7 @@
             },
           "target": 
              { 
-              "imagepath" : "./target/Dockerfile",
+              "imagePath" : "./target/Dockerfile",
               "imageRunCmd": "",
               "imageTestCmd": "",
               "imageVersion": "",
