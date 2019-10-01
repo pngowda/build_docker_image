@@ -1,24 +1,22 @@
 {
-      "RepoName": "SCT",
-      "images": [
-        {
-           "imageType": "base",
-           "imageName": "jenkinsagent",
-           "imagePath": "./base/Dockerfile",
-           "imageRunCmd": "",
-           "imageTestCmd": "",
-           "imageVersion": "",
-           "dependsOn":""
-        },
-        {
-           "imageType": "target",
-           "imageName": "sct_jenkinsagent",
-           "imagePath": "./sct/Dockerfile",
-           "imageVersion": "",
-           "imageRunCmd": "",
-           "imageTestCmd": "",
-           "dependsOn":"base"
-        }
-     ]
-   }
-
+   "RepoName": "alphine",
+   "images": 
+      {
+         "base": 
+            { 
+              "imagepath" : "./base/Dockerfile",
+              "imageRunCmd": "",
+              "imageTestCmd": "",
+              "imageVersion": "",
+              "dependsOn":""
+            }
+          "target": 
+             { 
+              "imagepath" : "./target/Dockerfile",
+              "imageRunCmd": "",
+              "imageTestCmd": "",
+              "imageVersion": "",
+              "dependsOn":""
+             }
+      }
+}
