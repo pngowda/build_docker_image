@@ -32,4 +32,16 @@ node() {
             def causes = currentBuild.rawBuild.getCauses()
             echo "causes: ${causes}"
     }
+    stage('build base image') {
+        dir("${env.WORKSPACE}/base"){
+        sh "pwd"
+        baseImage = docker.build("baseimage:${env.BUILD_ID}")
+        }
+    }
+    stage('build target image') {
+        dir("${env.WORKSPACE}/target"){
+        sh "pwd"
+        targetImage = docker.build("targetimage:${env.BUILD_ID}")
+        }
+    }
 }
