@@ -7,7 +7,11 @@ node() {
       // parse(File file) method is available since 2.2.0
       def obj = jsonSlurper.parse(fl)
       println obj.RepoName
-      println obj.images.keySet() 
+      //println obj.images.keySet() 
+      def imageList=obj.images.keySet() 
+        imageList.each{
+            println ${it}.imagePath
+        }
       println obj.images.base.imagePath
         
     }
