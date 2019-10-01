@@ -9,10 +9,13 @@ node() {
       println obj.RepoName
       //println obj.images.keySet() 
       def imageList=obj.images.keySet() 
-        imageList.each{
-            println obj.images."${it}".imagePath
+        foreach image in imageList{
+            println image
         }
-      println obj.images.base.imagePath
+       // imageList.each{
+         //   println obj.images."${it}".imagePath
+        //}
+      //println obj.images.base.imagePath
         
     }
      stage("parse changesets") {
