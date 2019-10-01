@@ -7,7 +7,8 @@ node() {
       // parse(File file) method is available since 2.2.0
       def obj = jsonSlurper.parse(fl)
       println obj.RepoName
-      println obj.images.imagePath
+      println obj.images
+      println obj.images.base.imagePath
         
     }
      stage("parse changesets") {
@@ -32,17 +33,17 @@ node() {
             def causes = currentBuild.rawBuild.getCauses()
             echo "causes: ${causes}"
     }
-    stage('build base image') {
-        echo "${env.USER}"
-        dir("${env.WORKSPACE}/base"){
-        sh "pwd"
-        baseImage = docker.build("baseimage:${env.BUILD_ID}")
-        }
-    }
-    stage('build target image') {
-        dir("${env.WORKSPACE}/target"){
-        sh "pwd"
-        targetImage = docker.build("targetimage:${env.BUILD_ID}")
-        }
-    }
+    //stage('build base image') {
+      //  echo "${env.USER}"
+       // dir("${env.WORKSPACE}/base"){
+        //sh "pwd"
+        //baseImage = docker.build("baseimage:${env.BUILD_ID}")
+        //}
+    //}
+    //stage('build target image') {
+     //   dir("${env.WORKSPACE}/target"){
+      //  sh "pwd"
+       // targetImage = docker.build("targetimage:${env.BUILD_ID}")
+        //}
+    //}
 }
