@@ -9,12 +9,9 @@ node() {
       println obj.RepoName
       //println obj.images.keySet() 
       def imageList=obj.images.keySet() 
-        foreach image in imageList{
-            println "${image}"
-        }
-       // imageList.each{
-         //   println obj.images."${it}".imagePath
-        //}
+      imageList.each{image->
+         println obj.images."${image}".imagePath
+      }
       //println obj.images.base.imagePath
         
     }
