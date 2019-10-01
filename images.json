@@ -7,7 +7,7 @@
               "imagePath" : "./base/Dockerfile",
               "imageRunCmd": "",
               "imageTestCmd": "",
-              "imageVersion": "",
+              "imageVersion": "63",
               "dependsOn":""
             },
           "target": 
@@ -16,7 +16,7 @@
               "imageRunCmd": "",
               "imageTestCmd": "",
               "imageVersion": "",
-              "dependsOn":""
+              "dependsOn":"base"
              }
       }
 }
