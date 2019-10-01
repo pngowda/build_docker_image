@@ -10,7 +10,8 @@ node() {
       //println obj.images.keySet() 
       def imageList=obj.images.keySet() 
         imageList.each{
-            println "${it}.imagePath"
+            println "${it}".imagePath
+            println "${it}".imageVersion
         }
       println obj.images.base.imagePath
         
