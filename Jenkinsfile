@@ -35,9 +35,9 @@ node() {
       modifiedList.each{filepath->
           println "${filepath}"
       }
-         if(modifiedList.contains('base'){
+      if(modifiedList.contains('base')){
              println "base is modified"
-         }
+      }
    }
     
     stage('define version info') {
