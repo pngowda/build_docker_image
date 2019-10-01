@@ -35,7 +35,8 @@ node() {
       modifiedList.each{filepath->
           println "${filepath}"
       }
-      if(modifiedList.contains('base')){
+      def pattern = /base.*/
+      if(modifiedList.contains(pattern)){
              println "base is modified"
       }
    }
