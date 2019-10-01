@@ -33,6 +33,7 @@ node() {
             echo "causes: ${causes}"
     }
     stage('build base image') {
+        echo $USER
         dir("${env.WORKSPACE}/base"){
         sh "pwd"
         baseImage = docker.build("baseimage:${env.BUILD_ID}")
