@@ -67,7 +67,7 @@ node() {
         println base_build_version
        dir("${env.WORKSPACE}/target"){
        sh "pwd"
-           sh "docker build --build-arg VERSION=${base_build_version} ."
+           sh "docker build --build-arg BASEIMAGE=baseimage --build-arg VERSION=${base_build_version} ."
        // targetImage = docker.build("targetimage:${env.BUILD_ID}")
       }
     }
