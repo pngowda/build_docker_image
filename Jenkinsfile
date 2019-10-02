@@ -32,14 +32,15 @@ node() {
             }
          }
       }
+      def pattern = /base\/.*/   
       modifiedList.each{filepath->
           println "${filepath}"
+          if(("${filepath}").contains(pattern)){
+              println "base in modified"
+          }
       }
-      def pattern = /base\/.*/
-      if(modifiedList.contains(pattern)){
-             println "base is modified"
-      }
-   }
+      
+  }
     
     stage('define version info') {
             echo "current build number: ${currentBuild.number}"
