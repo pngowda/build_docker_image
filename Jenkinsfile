@@ -62,6 +62,7 @@ node() {
         //}
     //}
     stage('build target image') {
+        println base_build_version
        dir("${env.WORKSPACE}/target"){
        sh "pwd"
            sh "docker build --build-arg VERSION=${base_build_version} ."
