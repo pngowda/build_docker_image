@@ -32,13 +32,16 @@ node() {
             }
          }
       }
+      def buildBase=false
       def pattern = /base\/.*/   
       modifiedList.each{filepath->
           println "${filepath}"
           if(("${filepath}").contains("base")){
-              println "base in modified"
+              println "base is modified"
+              buildBase=true
           }
       }
+         println buildBase
       
   }
     
