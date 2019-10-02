@@ -1,5 +1,6 @@
 ARG VERSION
-FROM myalphine:${VERSION}
+ARG BASEIMAGE
+FROM ${BASEIMAGE}:${VERSION}
 
 RUN apk update
 
