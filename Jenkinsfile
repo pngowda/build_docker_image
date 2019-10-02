@@ -15,12 +15,13 @@ node() {
          println obj.images."${image}".imagePath
          println obj.images."${image}".imageVersion
          base_build_version=obj.images."${image}".imageVersion
-         println base_build_version
+         println "base version "+base_build_version
       }
       //println obj.images.base.imagePath
         
     }
      stage("parse changesets") {
+       println "base version "+base_build_version
        def changeLogSets = currentBuild.changeSets
        def modifiedList=[]
        for (int i = 0; i < changeLogSets.size(); i++) {
