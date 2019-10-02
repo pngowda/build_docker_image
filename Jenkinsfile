@@ -1,6 +1,7 @@
 import groovy.json.JsonSlurper;
-def base_build_version
+
 node() {
+    def base_build_version
     stage("checkout and parse json") {
       checkout scm
       def jsonSlurper = new JsonSlurper()
