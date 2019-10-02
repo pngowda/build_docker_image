@@ -1,4 +1,5 @@
 import groovy.json.JsonSlurper;
+def base_build_version=""
 node() {
     stage("checkout and parse json") {
       checkout scm
@@ -12,6 +13,7 @@ node() {
       imageList.each{image->
          println obj.images."${image}".imagePath
          println obj.images."${image}".imageVersion
+         base_build_version=obj.images."${image}".imageVersion
       }
       //println obj.images.base.imagePath
         
@@ -32,16 +34,16 @@ node() {
             }
          }
       }
-      def buildBase=false
+      def buildBaseRequired=false
       def pattern = /base\/.*/   
       modifiedList.each{filepath->
           println "${filepath}"
           if(("${filepath}").contains("base")){
               println "base is modified"
-              buildBase=true
+              buildBaseRequired=true
           }
       }
-         println buildBase
+         println buildBaseRequired
       
   }
     
@@ -58,10 +60,11 @@ node() {
         //baseImage = docker.build("baseimage:${env.BUILD_ID}")
         //}
     //}
-    //stage('build target image') {
-     //   dir("${env.WORKSPACE}/target"){
-      //  sh "pwd"
+    stage('build target image') {
+       dir("${env.WORKSPACE}/target"){
+       sh "pwd"
+       sh 'docker build --build-arg version="${base_build_version}" .'
        // targetImage = docker.build("targetimage:${env.BUILD_ID}")
-        //}
-    //}
+      }
+    }
 }
