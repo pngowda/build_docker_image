@@ -14,7 +14,7 @@ node() {
       imageList.each{image->
          println obj.images."${image}".imagePath
          println obj.images."${image}".imageVersion
-         base_build_version=obj.images."${image}".imageVersion
+         base_build_version=obj.images.base.imageVersion
          println "base version "+base_build_version
       }
       //println obj.images.base.imagePath
