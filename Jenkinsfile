@@ -1,5 +1,5 @@
 import groovy.json.JsonSlurper;
-def base_build_version=""
+def base_build_version
 node() {
     stage("checkout and parse json") {
       checkout scm
@@ -14,6 +14,7 @@ node() {
          println obj.images."${image}".imagePath
          println obj.images."${image}".imageVersion
          base_build_version=obj.images."${image}".imageVersion
+         println base_build_version
       }
       //println obj.images.base.imagePath
         
