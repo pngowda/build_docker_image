@@ -1,5 +1,5 @@
-ARG version=${VERSION}
-FROM myalphine:${version}
+ARG VERSION
+FROM myalphine:${VERSION}
 
 RUN apk update
 
