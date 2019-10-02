@@ -1,4 +1,5 @@
-FROM myalphine:1
+ARG VERSION
+FROM myalphine:${VERSION}
 
 RUN apk update
 
