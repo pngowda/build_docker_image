@@ -53,9 +53,7 @@ node() {
           }
       }
          println buildBaseRequired
-      
-  }
-    
+   }
     stage('define version info') {
             echo "current build number: ${currentBuild.number}"
             echo "previous build number: ${currentBuild.previousBuild.getNumber()}"
@@ -65,9 +63,11 @@ node() {
     stage('build base image') {
         if(buildBaseRequired) {
           dir("${env.WORKSPACE}/base"){
-            sh "pwd"
             sh "docker build -t baseimage:${env.BUILD_ID} ."
             base_build_version="${env.BUILD_ID}"
+            docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+              sh "docker push prajwaln22/baseimage:${env.BUILD_ID}"
+            }
           }
         }
          else{
@@ -76,22 +76,11 @@ node() {
                 
     }
     stage('build target image') {
-       println base_build_version
-        
        dir("${env.WORKSPACE}/target"){
-         sh "pwd"
-
          sh "docker build -t prajwaln22/targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=baseimage --build-arg VERSION=${base_build_version} . "
-         
-          docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+         docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
               sh "docker push prajwaln22/targetimage:${env.BUILD_ID}"
           }
        }
     }
-    
-   // stage('Push image') {
-     //   docker.withRegistry('https://hub.docker.com/', 'dockerhub') {
-       //    sh "docker push prajwaln22/targetimage:${env.BUILD_ID}"
-        //}
-    //}
 }
