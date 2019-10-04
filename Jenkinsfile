@@ -77,7 +77,7 @@ node() {
     }
     stage('build target image') {
        println base_build_version
-       dockerImage = docker.build registry + ":${env.BUILD_ID}"
+        dockerImage = docker.build "${registry}" + ":${env.BUILD_ID}"
        dir("${env.WORKSPACE}/target"){
          sh "pwd"
          sh "docker build -t targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=baseimage --build-arg VERSION=${base_build_version} ."
