@@ -1,11 +1,11 @@
 import groovy.json.JsonSlurper;
 
 node() {
-    environment {
-      registry = "prajwaln22/targetimage"
-      registryCredential = 'dockerhub'
-      dockerImage = ''
-    }
+    //environment {
+      //registry = "prajwaln22/targetimage"
+      //registryCredential = 'dockerhub'
+      //dockerImage = ''
+    //}
     def base_build_version
     def buildBaseRequired=false
     stage("checkout and parse json") {
