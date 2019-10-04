@@ -85,7 +85,7 @@ node() {
     }
     
     stage('Push image') {
-        docker.withRegistry('https://hub.docker.com/prajwaln22', 'dockerhub') {
+        docker.withRegistry('https://hub.docker.com/u/prajwaln22/', 'dockerhub') {
            sh "docker push targetimage:${env.BUILD_ID}"
         }
     }
