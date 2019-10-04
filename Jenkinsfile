@@ -1,7 +1,10 @@
 import groovy.json.JsonSlurper;
 
 node() {
-    
+    environment {
+      registry = "prajwaln22/targetimage"
+      registryCredential = ‘dockerhub’
+    }
     def base_build_version
     def buildBaseRequired=false
     stage("checkout and parse json") {
@@ -73,10 +76,14 @@ node() {
     }
     stage('build target image') {
        println base_build_version
+       dockerImage = docker.build registry + ":${env.BUILD_ID}"
        dir("${env.WORKSPACE}/target"){
          sh "pwd"
          sh "docker build -t targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=baseimage --build-arg VERSION=${base_build_version} ."
        }
+        docker.withRegistry( '', registryCredential ) {
+        dockerImage.push()
+      }
     }
     
     stage('Push image') {
