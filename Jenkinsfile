@@ -81,7 +81,7 @@ node() {
        dir("${env.WORKSPACE}/target"){
          sh "pwd"
          //sh "docker build -t prajwaln22/targetimage:${env.BUILD_ID} "
-         dockerImage = docker.build prajwaln22/targetimage:"${env.BUILD_ID}"+" --build-arg BASEIMAGE=baseimage --build-arg VERSION=${base_build_version} ."
+         dockerImage = docker.build "prajwaln22/targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=baseimage --build-arg VERSION=${base_build_version} ."
       
         docker.withRegistry( '', 'dockerhub' ) {
         dockerImage.push()
