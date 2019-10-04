@@ -76,7 +76,7 @@ node() {
     ************************************************************/
     stage('build target image') {
        dir("${env.WORKSPACE}/target"){
-         sh "docker build -t prajwaln22/targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=baseimage --build-arg VERSION=${base_build_version} . "
+         sh "docker build -t prajwaln22/targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=prajwaln22/baseimage --build-arg VERSION=${base_build_version} . "
          docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
               sh "docker push prajwaln22/targetimage:${env.BUILD_ID}"
           }
