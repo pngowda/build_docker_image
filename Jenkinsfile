@@ -1,6 +1,12 @@
 import groovy.json.JsonSlurper;
 
 node() {
+    environment {
+       registry = "prajwaln22/docker_test"
+       registryCredential = 'dockerhub'
+       dockerImage = ''
+    }
+    
     def base_build_version
     def buildBaseRequired=false
     stage("checkout and parse json") {
@@ -76,5 +82,12 @@ node() {
          sh "pwd"
          sh "docker build -t targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=baseimage --build-arg VERSION=${base_build_version} ."
        }
+    }
+    
+    stage('Push image') {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+        }
     }
 }
