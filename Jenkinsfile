@@ -85,7 +85,7 @@ node() {
     }
     
     stage('Push image') {
-        withDockerRegistry([ credentialsId: dockerhub, url: "" ]) {
+        withDockerRegistry([ credentialsId: registryCredential, url: "" ]) {
             sh "docker push prajwaln22/targetimage:${env.BUILD_ID}"
            
         }
