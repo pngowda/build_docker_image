@@ -58,7 +58,7 @@ node() {
     stage('build base image') {
         if(buildBaseRequired) {
           dir("${env.WORKSPACE}/base"){
-            sh "docker build -t baseimage:${env.BUILD_ID} ."
+            sh "docker build -t prajwaln22/baseimage:${env.BUILD_ID} ."
             base_build_version="${env.BUILD_ID}"
             docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
               sh "docker push prajwaln22/baseimage:${env.BUILD_ID}"
