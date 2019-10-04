@@ -2,6 +2,7 @@ import groovy.json.JsonSlurper;
 
 node() {
     def base_build_version
+    def buildBaseRequired=false
     stage("checkout and parse json") {
       checkout scm
       def jsonSlurper = new JsonSlurper()
@@ -37,7 +38,7 @@ node() {
             }
          }
       }
-      def buildBaseRequired=false
+
       def pattern = /base\/.*/   
       modifiedList.each{filepath->
           println "${filepath}"
