@@ -81,7 +81,6 @@ node() {
        dir("${env.WORKSPACE}/target"){
          sh "pwd"
          sh "docker build -t prajwaln22/targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=baseimage --build-arg VERSION=${base_build_version} . "
-         sh "docker login --username=prajwaln22"
          sh "docker push prajwaln22/targetimage:${env.BUILD_ID}"
        }
     }
