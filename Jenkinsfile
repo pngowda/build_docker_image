@@ -1,11 +1,6 @@
 import groovy.json.JsonSlurper;
 
 node() {
-    environment {
-       registry = "prajwaln22/docker_test"
-       registryCredential = 'dockerhub'
-       dockerImage = ''
-    }
     
     def base_build_version
     def buildBaseRequired=false
