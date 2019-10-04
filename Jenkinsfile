@@ -85,8 +85,9 @@ node() {
     }
     
     stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-            app.push("${env.BUILD_NUMBER}")
+        withDockerRegistry([ credentialsId: dockerhub, url: "" ]) {
+            sh "docker push prajwaln22/targetimage:${env.BUILD_ID}"
+           
         }
     }
 }
