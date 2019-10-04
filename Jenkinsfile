@@ -63,6 +63,7 @@ node() {
             sh "docker build -t baseimage:${env.BUILD_ID} ."
             base_build_version="${env.BUILD_ID}"
           }
+        }
          else{
            println "base image to be taken from the registry" 
          }
