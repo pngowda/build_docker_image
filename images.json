@@ -7,7 +7,7 @@
               "imagePath" : "./base/Dockerfile",
               "imageRunCmd": "",
               "imageTestCmd": "",
-              "imageVersion": "63",
+              "imageVersion": "145",
               "dependsOn":""
             },
           "target": 
