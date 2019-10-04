@@ -56,19 +56,23 @@ node() {
             def causes = currentBuild.rawBuild.getCauses()
             echo "causes: ${causes}"
     }
-    //stage('build base image') {
-      //  echo "${env.USER}"
-       // dir("${env.WORKSPACE}/base"){
-        //sh "pwd"
-        //baseImage = docker.build("baseimage:${env.BUILD_ID}")
-        //}
-    //}
+    stage('build base image') {
+        if(buildBaseRequired) {
+          dir("${env.WORKSPACE}/base"){
+            sh "pwd"
+            sh "docker build -t baseimage:${env.BUILD_ID} ."
+            base_build_version="${env.BUILD_ID}"
+          }
+         else{
+           println "base image to be taken from the registry" 
+         }
+                
+    }
     stage('build target image') {
-        println base_build_version
+       println base_build_version
        dir("${env.WORKSPACE}/target"){
-       sh "pwd"
-       sh "docker build -t targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=baseimage --build-arg VERSION=${base_build_version} ."
-       // targetImage = docker.build("targetimage:${env.BUILD_ID}")
-      }
+         sh "pwd"
+         sh "docker build -t targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=baseimage --build-arg VERSION=${base_build_version} ."
+       }
     }
 }
