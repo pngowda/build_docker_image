@@ -82,7 +82,7 @@ node() {
          sh "pwd"
          sh "docker build -t targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=baseimage --build-arg VERSION=${base_build_version} ."
        }
-        docker.withRegistry( '', "${env.registryCredential}" ) {
+        docker.withRegistry( '', 'dockerhub' ) {
         dockerImage.push()
       }
     }
