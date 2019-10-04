@@ -82,4 +82,11 @@ node() {
           }
        }
     }
+    stage('Remove Unused docker image') {
+      sh "docker rmi prajwaln22/targetimage:${env.BUILD_ID}"
+      if(buildBaseRequired) {
+         sh "docker rmi prajwaln22/targetimage:${env.BUILD_ID}"
+      }
+    }
+}
 }
