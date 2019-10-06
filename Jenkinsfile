@@ -57,8 +57,8 @@ node() {
             echo "causes: ${causes}"
     }
     
-    stage ('docker build') {
-       imageList.each{image->
+    //stage ('docker build') {
+      // imageList.each{image->
            //def dependentImage=obj.images."${image}".dependsOn
            //println "dependednt image "+ dependentImage
            //if(obj.images."${image}".dependsOn != null ){
@@ -66,8 +66,8 @@ node() {
               // println dependentImage
                //build job: 'pipelineA', parameters: [string(name: 'param1', value: "value1")]
            //}
-       }
-    }
+       //}
+    //}
     
     /************************************************************
     
