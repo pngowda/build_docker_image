@@ -4,7 +4,7 @@ node() {
     def base_build_version
     def buildBaseRequired=false
     def imageList
-    def obj
+    //def obj
     /************************************************************
     
     ************************************************************/
@@ -12,7 +12,7 @@ node() {
        checkout scm
        def jsonSlurper = new JsonSlurper()
        File fl = new File("${WORKSPACE}/images.json")
-       obj = jsonSlurper.parse(fl)
+       def obj = jsonSlurper.parse(fl)
        imageList=obj.images.keySet() 
        imageList.each{image->
          println image
