@@ -119,7 +119,7 @@ def parseJsonFile() {
     println imageList
     imageList.each{image->
       println image
-      println obj.images
+      println obj.images.+image+.imagepath
       println obj.images.base.imagePath
 }
 }
