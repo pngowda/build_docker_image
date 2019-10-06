@@ -116,6 +116,7 @@ def parseJsonFile() {
     File jasonfFile = new File("${WORKSPACE}/images.json")
     def obj = jsonSlurper.parse(jasonfFile)
     def imageList=obj.images.keySet() 
+    println imageList
     imageList.each{image->
       println image
       println obj.images."${image}".dependsOn
