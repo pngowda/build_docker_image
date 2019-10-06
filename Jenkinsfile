@@ -55,7 +55,7 @@ node() {
     /************************************************************
     
     ************************************************************/
-    stage('build base image') {
+   /* stage('build base image') {
         if(buildBaseRequired) {
           dir("${env.WORKSPACE}/base"){
             sh "docker build -t prajwaln22/baseimage:${env.BUILD_ID} ."
@@ -69,12 +69,12 @@ node() {
            println "base image to be taken from the registry" 
          }
                 
-    }
+    }*/
    
     /************************************************************
     
     ************************************************************/
-    stage('build target image') {
+    /*stage('build target image') {
        dir("${env.WORKSPACE}/target"){
          sh "docker build -t prajwaln22/targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=prajwaln22/baseimage --build-arg VERSION=${base_build_version} . "
          docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
@@ -87,5 +87,5 @@ node() {
       if(buildBaseRequired) {
          sh "docker rmi prajwaln22/baseimage:${env.BUILD_ID}"
       }
-    }
+    }*/
 }
