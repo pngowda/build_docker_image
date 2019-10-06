@@ -12,11 +12,12 @@ node() {
        checkout scm
        def jsonSlurper = new JsonSlurper()
        File fl = new File("${WORKSPACE}/images.json")
-       def obj = jsonSlurper.parse(fl)
-       println obj.toString()
-       imageList=obj.images.keySet() 
+       def jasonContent = jsonSlurper.parse(fl)
+       println jasonContent
+       println jasonContent.toString()
+       imageList=jasonContent.images.keySet() 
        imageList.each{image->
-          base_build_version=obj.images.base.imageVersion
+          base_build_version=jasonContent.images.base.imageVersion
        }
      }
     
