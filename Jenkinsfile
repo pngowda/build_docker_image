@@ -63,7 +63,8 @@ node() {
                println dependentImage
                //build job: 'pipelineA', parameters: [string(name: 'param1', value: "value1")]
            }
-     }
+       }
+    }
     
     /************************************************************
     
