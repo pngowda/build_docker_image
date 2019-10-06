@@ -14,7 +14,8 @@ node() {
        def imageList=obj.images.keySet() 
        imageList.each{image->
          println image
-
+         println obj.images."${image}".dependsOn
+         println obj.images."${image}".imagePath
          base_build_version=obj.images.base.imageVersion
        }
      }
