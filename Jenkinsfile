@@ -1,26 +1,27 @@
 import groovy.json.JsonSlurper;
 
 node() {
-    def base_build_version
-    def buildBaseRequired=false
-    def imageList
-    def jsonSlurper
-    def obj
+    //def base_build_version
+    //def buildBaseRequired=false
+    //def imageList
+    //def jsonSlurper
+    //def obj
     /************************************************************
     
     ************************************************************/
      stage("checkout and parse json") {
        checkout scm
-       jsonSlurper = new JsonSlurper()
-       File fl = new File("${WORKSPACE}/images.json")
-       obj = jsonSlurper.parse(fl)
-       imageList=obj.images.keySet() 
-       imageList.each{image->
-         println image
-         println obj.images."${image}".dependsOn
-         println obj.images."${image}".imagePath
-         base_build_version=obj.images.base.imageVersion
-       }
+       parseJsonFile()
+       //jsonSlurper = new JsonSlurper()
+       //File fl = new File("${WORKSPACE}/images.json")
+       //obj = jsonSlurper.parse(fl)
+       //imageList=obj.images.keySet() 
+       //imageList.each{image->
+         //println image
+         //println obj.images."${image}".dependsOn
+         //println obj.images."${image}".imagePath
+         //base_build_version=obj.images.base.imageVersion
+       //}
      }
     
     /************************************************************
@@ -107,3 +108,17 @@ node() {
       }
     }*/
 }
+
+
+@NonCPS
+def parseJsonFile() {
+    def jsonSlurper = new JsonSlurper()
+    File jasonfFile = new File("${WORKSPACE}/images.json")
+    def obj = jsonSlurper.parse(jasonfFile)
+    def imageList=obj.images.keySet() 
+    imageList.each{image->
+      println image
+      println obj.images."${image}".dependsOn
+      println obj.images."${image}".imagePath
+}
+    
