@@ -13,8 +13,8 @@ node() {
        def obj = jsonSlurper.parse(fl)
        def imageList=obj.images.keySet() 
        imageList.each{image->
-         println obj.images.image.imagePath
-         println obj.images.image.dependsOn
+         println image
+
          base_build_version=obj.images.base.imageVersion
        }
      }
