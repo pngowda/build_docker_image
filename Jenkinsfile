@@ -14,7 +14,7 @@ node() {
        File fl = new File("${WORKSPACE}/images.json")
        def jasonContent = jsonSlurper.parse(fl)
        println jasonContent
-       println jasonContent.toString()
+       //println jasonContent.toString()
        imageList=jasonContent.images.keySet() 
        imageList.each{image->
           base_build_version=jasonContent.images.base.imageVersion
