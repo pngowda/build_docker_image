@@ -11,7 +11,6 @@ node() {
     ************************************************************/
      stage("checkout and parse json") {
        checkout scm
-       parseJsonFile()
        jsonSlurper = new JsonSlurper()
        File fl = new File("${WORKSPACE}/images.json")
        def obj = jsonSlurper.parse(fl)
