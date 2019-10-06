@@ -1,27 +1,25 @@
 import groovy.json.JsonSlurper;
+import groovy.json.JsonBuilder;
 
 node() {
     def base_build_version
     def buildBaseRequired=false
-    //def imageList
-    //def jsonSlurper
-    //def obj
+    def imageList
+    def jsonSlurper
     /************************************************************
     
     ************************************************************/
      stage("checkout and parse json") {
        checkout scm
        parseJsonFile()
-       //jsonSlurper = new JsonSlurper()
-       //File fl = new File("${WORKSPACE}/images.json")
-       //obj = jsonSlurper.parse(fl)
-       //imageList=obj.images.keySet() 
-       //imageList.each{image->
-         //println image
-         //println obj.images."${image}".dependsOn
-         //println obj.images."${image}".imagePath
-         //base_build_version=obj.images.base.imageVersion
-       //}
+       jsonSlurper = new JsonSlurper()
+       File fl = new File("${WORKSPACE}/images.json")
+       def obj = jsonSlurper.parse(fl)
+       print obj
+       imageList=obj.images.keySet() 
+       imageList.each{image->
+          base_build_version=obj.images.base.imageVersion
+       }
      }
     
     /************************************************************
@@ -49,32 +47,11 @@ node() {
           }
        }
     }
-    /************************************************************
     
-    ************************************************************/
-    stage('define version info') {
-            echo "current build number: ${currentBuild.number}"
-            echo "previous build number: ${currentBuild.previousBuild.getNumber()}"
-            def causes = currentBuild.rawBuild.getCauses()
-            echo "causes: ${causes}"
-    }
+   /************************************************************
     
-    //stage ('docker build') {
-      // imageList.each{image->
-           //def dependentImage=obj.images."${image}".dependsOn
-           //println "dependednt image "+ dependentImage
-           //if(obj.images."${image}".dependsOn != null ){
-             //  def dependentImage=obj.images."${image}".dependsOn
-              // println dependentImage
-               //build job: 'pipelineA', parameters: [string(name: 'param1', value: "value1")]
-           //}
-       //}
-    //}
-    
-    /************************************************************
-    
-    ************************************************************/
-   /* stage('build base image') {
+   ************************************************************/
+   stage('build base image') {
         if(buildBaseRequired) {
           dir("${env.WORKSPACE}/base"){
             sh "docker build -t prajwaln22/baseimage:${env.BUILD_ID} ."
@@ -87,39 +64,33 @@ node() {
          else{
            println "base image to be taken from the registry" 
          }
-                
-    }*/
+       
+       //File fl = new File("${WORKSPACE}/images.json")
+       //def obj = jsonSlurper.parse(fl)
+       //def builder = new JsonBuilder(obj)
+       //builder.content.device.dpidsha1 = 'abcd'  
+       //println(builder.toPrettyString())
+     }
    
-    /************************************************************
+   /************************************************************
     
-    ************************************************************/
-    /*stage('build target image') {
+   ************************************************************/
+    stage('build target image') {
        dir("${env.WORKSPACE}/target"){
          sh "docker build -t prajwaln22/targetimage:${env.BUILD_ID} --build-arg BASEIMAGE=prajwaln22/baseimage --build-arg VERSION=${base_build_version} . "
          docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
               sh "docker push prajwaln22/targetimage:${env.BUILD_ID}"
           }
        }
-    }
+     }
+    
+   /************************************************************
+    
+   ************************************************************/
     stage('Remove Unused docker image') {
       sh "docker rmi prajwaln22/targetimage:${env.BUILD_ID}"
       if(buildBaseRequired) {
-         sh "docker rmi prajwaln22/baseimage:${env.BUILD_ID}"
-      }
-    }*/
-}
-
-
-@NonCPS
-def parseJsonFile() {
-    def jsonSlurper = new JsonSlurper()
-    File jasonfFile = new File("${WORKSPACE}/images.json")
-    def obj = jsonSlurper.parse(jasonfFile)
-    def imageList=obj.images.keySet() 
-    println imageList.keySet()
-    imageList.each{image->
-      println image
-      println obj.images.base.imagePath
-}
-}
-    
+          sh "docker rmi prajwaln22/baseimage:${env.BUILD_ID}"
+       }
+     }
+  }
