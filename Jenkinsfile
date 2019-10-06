@@ -3,6 +3,7 @@ import groovy.json.JsonSlurper;
 node() {
     def base_build_version
     def buildBaseRequired=false
+    def imageList
     /************************************************************
     
     ************************************************************/
@@ -11,7 +12,7 @@ node() {
        def jsonSlurper = new JsonSlurper()
        File fl = new File("${WORKSPACE}/images.json")
        def obj = jsonSlurper.parse(fl)
-       def imageList=obj.images.keySet() 
+       imageList=obj.images.keySet() 
        imageList.each{image->
          println image
          println obj.images."${image}".dependsOn
@@ -54,6 +55,15 @@ node() {
             def causes = currentBuild.rawBuild.getCauses()
             echo "causes: ${causes}"
     }
+    
+    stage ('docker build') {
+       imageList.each{image->
+           if(obj.images."${image}".dependsOn){
+               def dependentImage=obj.images."${image}".dependsOn
+               println dependentImage
+               //build job: 'pipelineA', parameters: [string(name: 'param1', value: "value1")]
+           }
+     }
     
     /************************************************************
     
