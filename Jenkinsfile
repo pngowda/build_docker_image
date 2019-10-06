@@ -1,8 +1,8 @@
 import groovy.json.JsonSlurper;
 
 node() {
-    //def base_build_version
-    //def buildBaseRequired=false
+    def base_build_version
+    def buildBaseRequired=false
     //def imageList
     //def jsonSlurper
     //def obj
@@ -120,5 +120,6 @@ def parseJsonFile() {
       println image
       println obj.images."${image}".dependsOn
       println obj.images."${image}".imagePath
+}
 }
     
