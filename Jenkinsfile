@@ -59,11 +59,13 @@ node() {
     
     stage ('docker build') {
        imageList.each{image->
-           if(obj.images."${image}".dependsOn != null ){
-               def dependentImage=obj.images."${image}".dependsOn
-               println dependentImage
+           def dependentImage=obj.images."${image}".dependsOn
+           println "dependednt image "+ dependentImage
+           //if(obj.images."${image}".dependsOn != null ){
+             //  def dependentImage=obj.images."${image}".dependsOn
+              // println dependentImage
                //build job: 'pipelineA', parameters: [string(name: 'param1', value: "value1")]
-           }
+           //}
        }
     }
     
