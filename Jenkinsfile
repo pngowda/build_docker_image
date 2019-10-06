@@ -59,8 +59,8 @@ node() {
     
     stage ('docker build') {
        imageList.each{image->
-           def dependentImage=obj.images."${image}".dependsOn
-           println "dependednt image "+ dependentImage
+           //def dependentImage=obj.images."${image}".dependsOn
+           //println "dependednt image "+ dependentImage
            //if(obj.images."${image}".dependsOn != null ){
              //  def dependentImage=obj.images."${image}".dependsOn
               // println dependentImage
