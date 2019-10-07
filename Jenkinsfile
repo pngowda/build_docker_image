@@ -64,11 +64,6 @@ node() {
            println "base image to be taken from the registry" 
          }
        
-       //File fl = new File("${WORKSPACE}/images.json")
-       //def obj = jsonSlurper.parse(fl)
-       //def builder = new JsonBuilder(obj)
-       //builder.content.device.dpidsha1 = 'abcd'  
-       //println(builder.toPrettyString())
      }
    
    /************************************************************
