@@ -68,7 +68,7 @@ node() {
             def inputFile = new File("${WORKSPACE}/images.json")
             def json = new JsonSlurper().parseText(inputFile.text)
             def builder = new JsonBuilder(json)
-            builder.json.images.base.imageVersion = '150'  
+            print json.images.base.imageVersion
             println(builder.toPrettyString())
           }
         //}
