@@ -57,7 +57,7 @@ node() {
             //def jasonContent= new JsonSlurper().parse(jasonFile)
 
             String fileContents = new File("${WORKSPACE}/images.json").text
-            def slurped = new JsonSlurper().parseText(fileContents)
+            def slurped = new JsonSlurper().parse(jasonFile)
             println slurped
             def builder = new JsonBuilder(slurped)
             println builder
