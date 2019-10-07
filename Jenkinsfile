@@ -54,10 +54,10 @@ node() {
               sh "docker push prajwaln22/baseimage:${env.BUILD_ID}"
             }
             File jasonFile = new File("${WORKSPACE}/images.json")
-            //def jasonContent = new JsonSlurper().parse(jasonFile)
+            //def jasonContent= new JsonSlurper().parse(jasonFile)
             def slurped = new JsonSlurper().parse(jasonFile)
             def builder = new JsonBuilder(slurped)
-            builder.jasonContent.images.base.imageVersion = "${env.BUILD_ID}"
+            builder.slurped.images.base.imageVersion = "${env.BUILD_ID}"
             println(builder.toPrettyString())
           }
         }
