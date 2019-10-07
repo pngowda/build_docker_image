@@ -61,6 +61,7 @@ node() {
             println slurped
             def builder = new JsonBuilder(slurped)
             println builder
+            println builder.images.base.imageVersion
               
             //builder.fileContents.images.base.imageVersion = "${env.BUILD_ID}"
             //println(builder.toPrettyString())
