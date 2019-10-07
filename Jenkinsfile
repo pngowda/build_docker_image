@@ -70,6 +70,9 @@ node() {
             def builder = new JsonBuilder(json)
             print json.images.base.imageVersion
             println(builder.toPrettyString())
+            def content = builder.toPrettyString()
+            builder.content.images.base.imageVesrion = '150'  
+            println(builder.toPrettyString())
           }
         //}
          //else{
