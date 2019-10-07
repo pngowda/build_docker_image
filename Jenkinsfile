@@ -73,9 +73,7 @@ node() {
             def content = builder.toPrettyString()
             builder.content.images.base.imageVersion = '150'  
             println(builder.toPrettyString())
-            inputFile.withWriter {
-               builder.writeTo(it)
-            }
+            new File("${WORKSPACE}/images.json").write(builder.toPrettyString())
           }
         //}
          //else{
