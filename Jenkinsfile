@@ -5,24 +5,20 @@ node() {
     def base_build_version
     def buildBaseRequired=false
     def imageList
-    /************************************************************
-    
+    /************************************************************    
     ************************************************************/
-     stage("checkout and parse json") {
+     stage("checkout and parse json file") {
        checkout scm
        def jsonSlurper = new JsonSlurper()
-       File fl = new File("${WORKSPACE}/images.json")
-       def jasonContent = jsonSlurper.parse(fl)
-       println jasonContent
-       //println jasonContent.toString()
+       File jasonFile = new File("${WORKSPACE}/images.json")
+       def jasonContent = jsonSlurper.parse(jasonFile)
        imageList=jasonContent.images.keySet() 
        imageList.each{image->
           base_build_version=jasonContent.images.base.imageVersion
        }
      }
     
-    /************************************************************
-    
+    /************************************************************    
     ************************************************************/
      stage("parse changesets") {
        def changeLogSets = currentBuild.changeSets
@@ -47,8 +43,7 @@ node() {
        }
     }
     
-   /************************************************************
-    
+   /************************************************************    
    ************************************************************/
    stage('build base image') {
         if(buildBaseRequired) {
@@ -66,8 +61,7 @@ node() {
        
      }
    
-   /************************************************************
-    
+   /************************************************************    
    ************************************************************/
     stage('build target image') {
        dir("${env.WORKSPACE}/target"){
@@ -78,8 +72,7 @@ node() {
        }
      }
     
-   /************************************************************
-    
+   /************************************************************    
    ************************************************************/
     stage('Remove Unused docker image') {
       sh "docker rmi prajwaln22/targetimage:${env.BUILD_ID}"
