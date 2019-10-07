@@ -55,11 +55,17 @@ node() {
             }
             File jasonFile = new File("${WORKSPACE}/images.json")
             //def jasonContent= new JsonSlurper().parse(jasonFile)
-            def slurped = new JsonSlurper().parse(jasonFile)
+
+            String fileContents = new File("${WORKSPACE}/images.json").text
+            def slurped = new JsonSlurper().parseText(fileContents)
             def builder = new JsonBuilder(slurped)
-            println builder
-            builder.images.base.imageVersion = "${env.BUILD_ID}"
+            builder.fileContents.images.base.imageVersion = "${env.BUILD_ID}"
             println(builder.toPrettyString())
+            
+            //def slurped = new JsonSlurper().parse(jasonFile)
+            //def builder = new JsonBuilder(slurped)
+            //builder.images.base.imageVersion = "${env.BUILD_ID}"
+            //println(builder.toPrettyString())
           }
         //}
          //else{
