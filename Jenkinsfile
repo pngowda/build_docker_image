@@ -53,26 +53,11 @@ node() {
             docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
               sh "docker push prajwaln22/baseimage:${env.BUILD_ID}"
             }
-            //File jasonFile = new File("${WORKSPACE}/images.json")
-            //def jasonContent= new JsonSlurper().parse(jasonFile)
-
-            //String fileContents = new File("${WORKSPACE}/images.json").text
-            //def slurped = new JsonSlurper().parse(jasonFile)
-            //println slurped
-            //def builder = new JsonBuilder(slurped)
-            //println builder
-            //println builder.images.base.imageVersion
-              
-            //builder.fileContents.images.base.imageVersion = "${env.BUILD_ID}"
-            //println(builder.toPrettyString())
             def imageInfoFile = new File("${WORKSPACE}/images.json")
             def json = new JsonSlurper().parseText(imageInfoFile.text)
             def builder = new JsonBuilder(json)
-            print json.images.base.imageVersion
-            println(builder.toPrettyString())
             def content = builder.toPrettyString()
-            builder.content.images.base.imageVersion = '151'  
-            println(builder.toPrettyString())
+            builder.content.images.base.imageVersion = "${env.BUILD_ID}"
             imageInfoFile.write(builder.toPrettyString())
           }
         //}
