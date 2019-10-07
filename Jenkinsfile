@@ -5,14 +5,13 @@ node() {
     def base_build_version
     def buildBaseRequired=false
     def imageList
-    def jasonContent
     /************************************************************    
     ************************************************************/
      stage("checkout and parse json file") {
        checkout scm
        def jsonSlurper = new JsonSlurper()
        File jasonFile = new File("${WORKSPACE}/images.json")
-       jasonContent = jsonSlurper.parse(jasonFile)
+       def jasonContent = jsonSlurper.parse(jasonFile)
        imageList=jasonContent.images.keySet() 
        imageList.each{image->
           base_build_version=jasonContent.images.base.imageVersion
@@ -54,10 +53,11 @@ node() {
             docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
               sh "docker push prajwaln22/baseimage:${env.BUILD_ID}"
             }
-            println jasonContent
+            File jasonFile = new File("${WORKSPACE}/images.json")
+            def jasonContent = jsonSlurper.parse(jasonFile)
             def slurped = new JsonSlurper().parseText(jasonContent)
             def builder = new JsonBuilder(slurped)
-            //builder.jasonContent.images.base.imageVersion = "${env.BUILD_ID}"
+            builder.jasonContent.images.base.imageVersion = "${env.BUILD_ID}"
             println(builder.toPrettyString())
           }
         }
