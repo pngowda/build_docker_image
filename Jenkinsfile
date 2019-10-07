@@ -71,7 +71,7 @@ node() {
             print json.images.base.imageVersion
             println(builder.toPrettyString())
             def content = builder.toPrettyString()
-            builder.content.images.base.imageVesrion = '150'  
+            builder.content.images.base.imageVersion = '150'  
             println(builder.toPrettyString())
           }
         //}
