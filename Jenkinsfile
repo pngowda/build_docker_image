@@ -57,7 +57,7 @@ node() {
             //def jasonContent= new JsonSlurper().parse(jasonFile)
             def slurped = new JsonSlurper().parse(jasonFile)
             def builder = new JsonBuilder(slurped)
-            builder.slurped.images.base.imageVersion = "${env.BUILD_ID}"
+            builder.images.base.imageVersion = "${env.BUILD_ID}"
             println(builder.toPrettyString())
           }
         }
