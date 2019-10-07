@@ -46,7 +46,7 @@ node() {
    /************************************************************    
    ************************************************************/
    stage('build base image') {
-        if(buildBaseRequired) {
+        //if(buildBaseRequired) {
           dir("${env.WORKSPACE}/base"){
             sh "docker build -t prajwaln22/baseimage:${env.BUILD_ID} ."
             base_build_version="${env.BUILD_ID}"
@@ -57,13 +57,14 @@ node() {
             //def jasonContent= new JsonSlurper().parse(jasonFile)
             def slurped = new JsonSlurper().parse(jasonFile)
             def builder = new JsonBuilder(slurped)
+            println builder
             builder.images.base.imageVersion = "${env.BUILD_ID}"
             println(builder.toPrettyString())
           }
-        }
-         else{
-           println "base image to be taken from the registry" 
-         }
+        //}
+         //else{
+         //  println "base image to be taken from the registry" 
+         //}
        
      }
    
