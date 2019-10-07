@@ -1,5 +1,5 @@
-import groovy.json.JsonSlurper;
-import groovy.json.JsonBuilder;
+import groovy.json.JsonSlurper
+import groovy.json.JsonBuilder
 
 node() {
     def base_build_version
@@ -58,9 +58,12 @@ node() {
 
             String fileContents = new File("${WORKSPACE}/images.json").text
             def slurped = new JsonSlurper().parseText(fileContents)
+            println slurped
             def builder = new JsonBuilder(slurped)
-            builder.fileContents.images.base.imageVersion = "${env.BUILD_ID}"
-            println(builder.toPrettyString())
+            println builder
+              
+            //builder.fileContents.images.base.imageVersion = "${env.BUILD_ID}"
+            //println(builder.toPrettyString())
             
             //def slurped = new JsonSlurper().parse(jasonFile)
             //def builder = new JsonBuilder(slurped)
