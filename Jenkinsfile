@@ -6,13 +6,12 @@ node() {
     def buildBaseRequired=false
     def imageList
     def jasonContent
-    File jasonFile
     /************************************************************    
     ************************************************************/
      stage("checkout and parse json file") {
        checkout scm
        def jsonSlurper = new JsonSlurper()
-       jasonFile = new File("${WORKSPACE}/images.json")
+       File jasonFile = new File("${WORKSPACE}/images.json")
        jasonContent = jsonSlurper.parse(jasonFile)
        imageList=jasonContent.images.keySet() 
        imageList.each{image->
@@ -55,9 +54,10 @@ node() {
             docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
               sh "docker push prajwaln22/baseimage:${env.BUILD_ID}"
             }
+            println jasonContent
             def slurped = new JsonSlurper().parseText(jasonContent)
             def builder = new JsonBuilder(slurped)
-            builder.jasonContent.images.base.imageVersion = "${env.BUILD_ID}"
+            //builder.jasonContent.images.base.imageVersion = "${env.BUILD_ID}"
             println(builder.toPrettyString())
           }
         }
