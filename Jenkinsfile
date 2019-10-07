@@ -65,15 +65,15 @@ node() {
               
             //builder.fileContents.images.base.imageVersion = "${env.BUILD_ID}"
             //println(builder.toPrettyString())
-            def inputFile = new File("${WORKSPACE}/images.json")
-            def json = new JsonSlurper().parseText(inputFile.text)
+            def imageInfoFile = new File("${WORKSPACE}/images.json")
+            def json = new JsonSlurper().parseText(imageInfoFile.text)
             def builder = new JsonBuilder(json)
             print json.images.base.imageVersion
             println(builder.toPrettyString())
             def content = builder.toPrettyString()
-            builder.content.images.base.imageVersion = '150'  
+            builder.content.images.base.imageVersion = '151'  
             println(builder.toPrettyString())
-            new File("${WORKSPACE}/images.json").write(builder.toPrettyString())
+            imageInfoFile.write(builder.toPrettyString())
           }
         //}
          //else{
