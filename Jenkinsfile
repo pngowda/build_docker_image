@@ -81,11 +81,13 @@ node() {
    /************************************************************    
    ************************************************************/
     stage('scan docker images') {
-         sh "export ANCHORE_CLI_URL=http://localhost:8228/v1"
-         sh "export ANCHORE_CLI_USER=admin"
-         sh "export ANCHORE_CLI_PASS=foobar"
-         sh "anchore-cli image add prajwaln22/targetimage:${env.BUILD_ID}"
-         sh "anchore-cli evaluate check prajwaln22/baseimage:${env.BUILD_ID} --detail"
+         sh '''
+         export ANCHORE_CLI_URL=http://localhost:8228/v1"
+         export ANCHORE_CLI_USER=admin"
+         export ANCHORE_CLI_PASS=foobar"
+         anchore-cli image add prajwaln22/targetimage:"${env.BUILD_ID}"
+         '''
+         //sh "anchore-cli evaluate check prajwaln22/baseimage:${env.BUILD_ID} --detail"
        }
 
    /************************************************************    
