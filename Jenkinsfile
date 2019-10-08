@@ -85,7 +85,7 @@ node() {
          export ANCHORE_CLI_URL=http://localhost:8228/v1
          export ANCHORE_CLI_USER=admin
          export ANCHORE_CLI_PASS=foobar
-         anchore-cli image add prajwaln22/targetimage:145
+         anchore-cli image add prajwaln22/targetimage:228
          '''
          //sh "anchore-cli evaluate check prajwaln22/baseimage:${env.BUILD_ID} --detail"
        }
