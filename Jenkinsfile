@@ -80,6 +80,14 @@ node() {
     
    /************************************************************    
    ************************************************************/
+    stage('scan docker images') {
+         sh "anchore-cli image add prajwaln22/baseimage:${env.BUILD_ID}"
+         sh "anchore-cli evaluate check prajwaln22/baseimage:${env.BUILD_ID} --detail"
+       }
+     }
+
+   /************************************************************    
+   ************************************************************/
     stage('Remove Unused docker image') {
       sh "docker rmi prajwaln22/targetimage:${env.BUILD_ID}"
       if(buildBaseRequired) {
