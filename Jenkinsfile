@@ -84,7 +84,6 @@ node() {
          sh "anchore-cli image add prajwaln22/baseimage:${env.BUILD_ID}"
          sh "anchore-cli evaluate check prajwaln22/baseimage:${env.BUILD_ID} --detail"
        }
-     }
 
    /************************************************************    
    ************************************************************/
