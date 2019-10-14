@@ -91,6 +91,8 @@ node() {
          //sh "anchore-cli evaluate check prajwaln22/baseimage:${env.BUILD_ID} --detail"
          */
         sh "dockscan -r html -o ${WORKSPACE}/scan_report"
+        
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '', reportFiles: 'scan_report.html', reportName: 'HTML Report', reportTitles: ''])
        }
 
    /************************************************************    
