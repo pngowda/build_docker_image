@@ -81,6 +81,7 @@ node() {
    /************************************************************    
    ************************************************************/
     stage('scan docker images') {
+         /*
          sh '''
          export ANCHORE_CLI_URL=http://localhost:8228/v1
          export ANCHORE_CLI_USER=admin
@@ -88,6 +89,8 @@ node() {
          anchore-cli image add prajwaln22/targetimage:228
          '''
          //sh "anchore-cli evaluate check prajwaln22/baseimage:${env.BUILD_ID} --detail"
+         */
+        sh "dockscan -r html -o ${WORKSPACE}/scan_report"
        }
 
    /************************************************************    
