@@ -1,3 +1,5 @@
+@Library('test-library') _
+
 import groovy.json.JsonSlurper
 import groovy.json.JsonBuilder
 
@@ -21,6 +23,7 @@ node() {
     /************************************************************    
     ************************************************************/
      stage("parse changesets") {
+       mkobitVar.runMyPython()
        def changeLogSets = currentBuild.changeSets
        def modifiedList=[]
        for (int i = 0; i < changeLogSets.size(); i++) {
